@@ -1,3 +1,4 @@
+/* Client-side hook to manage state and interactivity */
 'use client';
 import { useState } from 'react';
 import * as bitcoin from 'bitcoinjs-lib';
@@ -10,11 +11,16 @@ import { Balance } from './types/balance';
 const bip32 = BIP32Factory(ecc);
 
 export default function Home() {
+  /* State to manage the seed phrase */
   const [seedPhrase, setSeedPhrase] = useState<string | null>(null);
+  /* State to manage generated addresses for different currencies */
   const [addresses, setAddresses] = useState<{ [key: string]: string[] }>({});
+  /* State to manage fetched balances */
   const [balances, setBalances] = useState<Balance[]>([]);
+  /* State to manage currently selected currency */
   const [selectedCurrency, setSelectedCurrency] = useState<string>('ETH');
 
+  /* Validates and updates the seed phrase state */
   const handleSeedPhraseChange = (value: string) => {
     if (bip39.validateMnemonic(value)) {
       setSeedPhrase(value);
@@ -23,6 +29,15 @@ export default function Home() {
     }
   };
 
+  /* Handles changes in the selected currency and fetches balances */
+  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCurrency = e.target.value;
+    setSelectedCurrency(newCurrency);
+
+    fetchBalances(newCurrency);
+  };
+
+  /* Generates Ethereum addresses from the seed phrase */
   const generateEthAddresses = (walletAddresses: { [key: string]: string[] }) => {
     const ethAdresses: string[] = [];
     for (let i = 0; i < 3; i++) {
@@ -33,6 +48,7 @@ export default function Home() {
     walletAddresses['ETH'] = ethAdresses;
   }
 
+  /* Generic function to generate addresses for other cryptocurrencies */
   const generateCoinAdresses = (
     walletAddresses: { [key: string]: string[] },
     path: string,
@@ -54,6 +70,7 @@ export default function Home() {
     walletAddresses[coin] = coinAdresses;
   }
 
+  /* Function to generate addresses for ETH, BTC, DOGE, LTC, and DASH */
   const generateAddresses = async () => {
     if (!seedPhrase) {
       alert('Invalid Seed Phrase');
@@ -81,13 +98,7 @@ export default function Home() {
     setAddresses(walletAddresses);
   };
 
-  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newCurrency = e.target.value;
-    setSelectedCurrency(newCurrency);
-
-    fetchBalances(newCurrency);
-  };
-
+  /* Sends a request to the backend to fetch balances for the selected currency */
   const fetchBalances = async (currency: string) => {
     try {
       const response = await axios.post('/api/balances', {
