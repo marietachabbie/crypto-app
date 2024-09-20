@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crypto Balance Checker
 
-## Getting Started
+[English](#english) | [Русский](#русский)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## English
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Overview
+Crypto Balance Checker is a web application that allows users to generate cryptocurrency addresses using a seed phrase and view balances for multiple currencies, such as Bitcoin, Ethereum, Litecoin, Dogecoin, and Dash.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Features
+- Generate cryptocurrency addresses from a seed phrase.
+- View balances in USD for multiple currencies.
+- Switch between supported cryptocurrencies.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Installation
+1. Install dependencies:
+    ```bash
+    # client
+    npm install
+    # server
+    cd crypto-backend && npm install
+    ```
 
-## Learn More
+2. Setup variables in `crypto-backend/.env` file (a sample is provided)
 
-To learn more about Next.js, take a look at the following resources:
+3. Start the server:
+    ```bash
+    # cd crupto-backend
+    npm run start
+    ```
+4. Start the client:
+    ```bash
+    npm run start
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Visit `http://localhost:3000` in your browser to access the app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Usage
+- Enter a valid seed phrase (e.g. `female absent wagon shell shrimp flip orbit alcohol banana hotel scan chef`).
+- Click "Generate Addresses" to generate addresses for supported cryptocurrencies.
+- View the generated addresses and click "View Balances" to see the balances in USD.
+- Select currency to refetch balances in desired currency
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Русский
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Обзор
+Crypto Balance Checker — это веб-приложение, которое позволяет пользователям генерировать криптовалютные адреса с использованием сид-фразы и просматривать балансы для нескольких валют, таких как Bitcoin, Ethereum, Litecoin, Dogecoin и Dash.
+
+### Возможности
+Генерация криптовалютных адресов с использованием сид-фразы.
+Просмотр балансов в USD для нескольких валют.
+Переключение между поддерживаемыми криптовалютами.
+
+### Установка
+1. Установить зависимости:
+    ```bash
+    # клиент
+    npm install
+    # сервер
+    cd crypto-backend && npm install
+    ```
+
+2. Настройте переменные в файле `crypto-backend/.env` (пример предоставлен).
+
+3. Запустить сервер:
+    ```bash
+    # перейдите в папку crypto-backend
+    npm run start
+    ```
+
+3. Запустите клиент:
+    ```bash
+    npm run start
+    ```
+
+5. Откройте http://localhost:3000 в браузере для доступа к приложению.
+
+### Использование
+- Введите действительную сид-фразу (например: female absent wagon shell shrimp flip orbit alcohol banana hotel scan chef).
+- Нажмите "Generate Addresses", чтобы сгенерировать адреса для поддерживаемых криптовалют.
+- Просмотрите сгенерированные адреса и нажмите "View Balances", чтобы увидеть балансы в USD.
+- Выберите валюту для обновления балансов в нужной валюте.
